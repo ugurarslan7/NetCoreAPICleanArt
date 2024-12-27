@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Apı.Filters;
+using Application.Features.Categories;
+using Application.Features.Categories.Create;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Categories;
-using Repositories.Products;
-using Services.Categories;
 using Services.Categories.Create;
-using Services.Filters;
-using Services.Products;
-using Services.Products.Create;
-using Services.Products.Update;
 
-namespace API.Controllers
+namespace Apı.Controllers
 {
     public class CategoriesController(ICategoryService categoryService) : CustomBaseController
     {

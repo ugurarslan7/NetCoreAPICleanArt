@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application;
 using Microsoft.AspNetCore.Mvc;
-using Services;
 using System.Net;
 
-namespace API.Controllers
+namespace Apı.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

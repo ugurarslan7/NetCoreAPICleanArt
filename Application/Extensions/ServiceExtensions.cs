@@ -23,16 +23,13 @@ namespace Application.Extensions
             serviceDescriptors.AddScoped<IProductService, ProductService>();
             serviceDescriptors.AddScoped<ICategoryService, CategoryService>();
 
-            //serviceDescriptors.AddScoped(typeof(NotFoundFilter<,>));
-
             serviceDescriptors.AddFluentValidationAutoValidation();
 
             serviceDescriptors.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             serviceDescriptors.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            //serviceDescriptors.AddExceptionHandler<CriticalExceptionHandler>();
-            //serviceDescriptors.AddExceptionHandler<GlobalExceptionHandler>();
+
 
             return serviceDescriptors;
         }

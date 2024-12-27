@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Repositories.Products;
-using Services.Filters;
-using Services.Products;
-using Services.Products.Create;
-using Services.Products.Update;
+﻿using Apı.Filters;
+using Application.Features.Products;
+using Application.Features.Products.Create;
+using Application.Features.Products.Update;
+using Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace Apı.Controllers
 {
     public class ProductsController(IProductService productService) : CustomBaseController
     {

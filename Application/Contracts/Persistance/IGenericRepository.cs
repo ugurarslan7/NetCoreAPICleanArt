@@ -12,5 +12,7 @@ namespace Application.Contracts.Persistance
         void Update(T entity);
         void Delete(T entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
+
+        Task<bool> AnyAsync(TId id);
     }
 }
