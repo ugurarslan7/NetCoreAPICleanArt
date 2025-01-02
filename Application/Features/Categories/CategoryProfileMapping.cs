@@ -10,14 +10,16 @@ namespace Application.Features.Categories
     {
         public CategoryProfileMapping()
         {
+            CreateMap<CategoryDto, Category>().ReverseMap();
+
             CreateMap<Category, CategoryWithProductsDto>().ReverseMap();
-            CreateMap<Category, CategoryDto>().ReverseMap();
 
             CreateMap<CreateCategoryRequest, Category>().ForMember(dest => dest.Name,
-                opt => opt.MapFrom(p => p.Name.ToLowerInvariant()));
+                opt => opt.MapFrom(src => src.Name.ToLowerInvariant()));
 
             CreateMap<UpdateCategoryRequest, Category>().ForMember(dest => dest.Name,
-              opt => opt.MapFrom(p => p.Name.ToLowerInvariant()));
+                opt => opt.MapFrom(src => src.Name.ToLowerInvariant()));
+
         }
     }
 }

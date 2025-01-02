@@ -13,10 +13,11 @@ namespace Application.Features.Categories
 
         public async Task<ServiceResult<CategoryWithProductsDto>> GetCategoryWithProductsAsync(int categoryId)
         {
-            var category = categoryRepository.GetCategoriyWithProductAsync(categoryId);
+            var category = await categoryRepository.GetCategoryWithProductAsync(categoryId);
+
             if (category is null)
             {
-                return ServiceResult<CategoryWithProductsDto>.Fail("Category not found", HttpStatusCode.NotFound);
+                return ServiceResult<CategoryWithProductsDto>.Fail("kategori bulunamadı.", HttpStatusCode.NotFound);
             }
 
             var categoryAsDto = mapper.Map<CategoryWithProductsDto>(category);
@@ -26,7 +27,7 @@ namespace Application.Features.Categories
 
         public async Task<ServiceResult<List<CategoryWithProductsDto>>> GetCategoryWithProductsAsync()
         {
-            var category = categoryRepository.GetCategoriyWithProductAsync();
+            var category = await categoryRepository.GetCategoryWithProductAsync();
 
             var categoryAsDto = mapper.Map<List<CategoryWithProductsDto>>(category);
 
@@ -72,17 +73,19 @@ namespace Application.Features.Categories
 
         public async Task<ServiceResult> UpdateAsync(int id, UpdateCategoryRequest request)
         {
-            var isCategorytNameExist = await categoryRepository.AnyAsync(p => p.Name == request.Name && p.Id != id);
-            if (isCategorytNameExist)
+            var isCategoryNameExist =
+               await categoryRepository.AnyAsync(x => x.Name == request.Name && x.Id != id);
+
+            if (isCategoryNameExist)
             {
-                return ServiceResult.Fail("ürün ismi veritabanında bulunmaktadır.", HttpStatusCode.BadRequest);
+                return ServiceResult.Fail("kategori ismi veritabanında bulunmaktadır.",
+                    HttpStatusCode.BadRequest);
             }
 
             var category = mapper.Map<Category>(request);
             category.Id = id;
 
             categoryRepository.Update(category);
-
             await unitOfWork.SaveChangesAsync();
 
             return ServiceResult.Success(HttpStatusCode.NoContent);

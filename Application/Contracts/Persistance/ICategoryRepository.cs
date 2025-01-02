@@ -4,7 +4,7 @@ namespace Application.Contracts.Persistance
 {
     public interface ICategoryRepository : IGenericRepository<Category, int>
     {
-        Task<Category?> GetCategoriyWithProductAsync(int id);
-        Task<List<Category>> GetCategoriyWithProductAsync();
+        Task<Category?> GetCategoryWithProductAsync(int id);
+        Task<List<Category>> GetCategoryWithProductAsync();
     }
 }

@@ -12,17 +12,17 @@ namespace Persistence.Categories
         {
         }
 
-        public Task<Category?> GetCategoriyWithProductAsync(int id)
+        public Task<Category?> GetCategoryWithProductAsync(int id)
         {
             return Context.Categories.Include(p => p.Products).FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public IQueryable<Category> GetCategoriyWithProduct()
+        public IQueryable<Category> GetCategoryWithProduct()
         {
             return Context.Categories.Include(p => p.Products).AsQueryable();
         }
 
-        public Task<List<Category>> GetCategoriyWithProductAsync()
+        public Task<List<Category>> GetCategoryWithProductAsync()
         {
            return Context.Categories.Include(p=>p.Products).ToListAsync();
         }

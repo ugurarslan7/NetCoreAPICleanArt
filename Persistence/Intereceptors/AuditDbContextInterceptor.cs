@@ -9,7 +9,7 @@ namespace Persistence.Intereceptors
         private static Dictionary<EntityState, Action<DbContext, IBaseAuditEntity>> _behavior = new()
         {
             {EntityState.Added,AddBehavior},
-            {EntityState.Added,ModifiedBehavior}
+            {EntityState.Modified,ModifiedBehavior}
         };
 
         private static void AddBehavior(DbContext context, IBaseAuditEntity entity)
@@ -30,7 +30,7 @@ namespace Persistence.Intereceptors
             {
                 if (item.Entity is not IBaseAuditEntity _baseAuditEntity) continue;
 
-                if (item.State is not EntityState.Added or EntityState.Modified) continue;
+                if (item.State is not (EntityState.Added or EntityState.Modified)) continue;
 
                 _behavior[item.State](eventData.Context, _baseAuditEntity);
 
