@@ -3,13 +3,15 @@ using Application.Contracts.Persistance;
 using Application.Features.Products.Create;
 using Application.Features.Products.Dto;
 using Application.Features.Products.Update;
+using Application.ServiceBus;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Events;
 using System.Net;
 
 namespace Application.Features.Products
 {
-    public class ProductService(IProductRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : IProductService
+    public class ProductService(IProductRepository repository, IUnitOfWork unitOfWork, IMapper mapper,IServiceBus serviceBus) : IProductService
     {
 
         public async Task<ServiceResult<List<ProductDto>>> GetAllListAsync()
@@ -68,6 +70,8 @@ namespace Application.Features.Products
             await repository.AddAsync(product);
 
             await unitOfWork.SaveChangesAsync();
+
+            await serviceBus.PublishAsync(new ProductAddedEvent(product.Id,product.Name,product.Price));
 
             return ServiceResult<CreateProductResponse>.SuccessAsCreated(new CreateProductResponse(product.Id), $"api/products/{product.Id}");
         }

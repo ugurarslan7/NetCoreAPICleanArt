@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Options
 {
-    public class ConnectionStringOption
+    public class ServiceBusOption
     {
-        public const string Key = "ConnectionStrings";
-
-        public string SqlServer { get; set; } = default!;
+        public string Url { get; set; } = default!;
     }
 }

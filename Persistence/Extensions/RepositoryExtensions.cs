@@ -1,11 +1,11 @@
 ﻿using Application.Contracts.Persistance;
+using Domain.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Categories;
 using Persistence.Intereceptors;
 using Persistence.Products;
-using Repositories;
 
 namespace Persistence.Extensions
 {
